@@ -1,0 +1,5 @@
+﻿{
+    "Raven": {
+        "ConnectionString": "Url=http://localhost:8080/ravendb/databases/cpassets"
+    }
+}

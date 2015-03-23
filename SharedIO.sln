@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22310.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedIO.API", "SharedIO.API\SharedIO.API.csproj", "{2D72A175-BAFF-41AE-9867-4456B555AEB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedIO.API.Tests", "SharedIO.API.Tests\SharedIO.API.Tests.csproj", "{93FAEA89-8F0E-47B8-A991-3E5382F81B11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{8DA719B9-284D-4372-ADBC-B9EAC8496F7F}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{13CCFA58-3CFF-44F1-BB8B-92ECF958384D}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\SharedIOAPI-WAWS-dev.json = PublishScripts\Configurations\SharedIOAPI-WAWS-dev.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedIO.Model", "SharedIO.Model\SharedIO.Model.csproj", "{6E838BD8-A3FB-497E-9E5D-DDEA3802EF41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D72A175-BAFF-41AE-9867-4456B555AEB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D72A175-BAFF-41AE-9867-4456B555AEB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D72A175-BAFF-41AE-9867-4456B555AEB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D72A175-BAFF-41AE-9867-4456B555AEB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93FAEA89-8F0E-47B8-A991-3E5382F81B11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93FAEA89-8F0E-47B8-A991-3E5382F81B11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93FAEA89-8F0E-47B8-A991-3E5382F81B11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93FAEA89-8F0E-47B8-A991-3E5382F81B11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E838BD8-A3FB-497E-9E5D-DDEA3802EF41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E838BD8-A3FB-497E-9E5D-DDEA3802EF41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E838BD8-A3FB-497E-9E5D-DDEA3802EF41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E838BD8-A3FB-497E-9E5D-DDEA3802EF41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13CCFA58-3CFF-44F1-BB8B-92ECF958384D} = {8DA719B9-284D-4372-ADBC-B9EAC8496F7F}
+	EndGlobalSection
+EndGlobal

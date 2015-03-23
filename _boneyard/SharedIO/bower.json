@@ -1,0 +1,9 @@
+{
+    "name": "SharedIO",
+    "private": true,
+    "dependencies": {
+        "lodash": "^3.1.0"
+    },
+    "exportsOverride": {
+    }
+}
