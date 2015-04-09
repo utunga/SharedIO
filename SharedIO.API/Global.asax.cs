@@ -35,17 +35,18 @@ namespace SharedIO.API
         {
             using (var ravenSession = WebApiApplication.Store.OpenSession())
             {
-                var current = ravenSession.Query<Member>();
+                /*
+                var current = ravenSession.Query<Account>();
                 if (!current.Any())
                 {
-                    ravenSession.Store(new Member()
+                    ravenSession.Store(new Account()
                     {
-                        id = ShortGuid.Encode(new Guid()),
-                        name = "Joe",
-                        aboutme = "Friendly"
+                        Name = "Joe",
+                        About = "Friendly"
                     });
                     ravenSession.SaveChanges();
                 }
+                */
             }
         }
 

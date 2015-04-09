@@ -16,11 +16,11 @@
 //    {
 // 
 //
-//        public UserManager<Member> UserManager { get; private set; }
+//        public _userManager<Member> _userManager { get; private set; }
 //
-//        public AccountController(UserManager<Member> userManager)
+//        public AccountController(_userManager<Member> userManager)
 //        {
-//            UserManager = userManager;
+//            _userManager = userManager;
 //        }
 //         
 //        // POST: /Account/Login
@@ -31,7 +31,7 @@
 //        {
 //            if (ModelState.IsValid)
 //            {
-//                var user = await UserManager.FindAsync(model.UserName, model.Password);
+//                var user = await _userManager.FindAsync(model.UserName, model.Password);
 //                if (user != null)
 //                {
 //                    await SignInAsync(user, model.RememberMe);
@@ -58,7 +58,7 @@
 //            if (ModelState.IsValid)
 //            {
 //                var user = new Member() { UserName = model.UserName };
-//                var result = await UserManager.CreateAsync(user, model.Password);
+//                var result = await _userManager.CreateAsync(user, model.Password);
 //                if (result.Succeeded)
 //                {
 //                    await SignInAsync(user, isPersistent: false);
@@ -81,7 +81,7 @@
 //        public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
 //        {
 //            ManageMessageId? message = null;
-//            IdentityResult result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
+//            IdentityResult result = await _userManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
 //            if (result.Succeeded)
 //            {
 //                message = ManageMessageId.RemoveLoginSuccess;
@@ -106,7 +106,7 @@
 //            {
 //                if (ModelState.IsValid)
 //                {
-//                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+//                    IdentityResult result = await _userManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
 //                    if (result.Succeeded)
 //                    {
 //                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
@@ -128,7 +128,7 @@
 //
 //                if (ModelState.IsValid)
 //                {
-//                    IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+//                    IdentityResult result = await _userManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
 //                    if (result.Succeeded)
 //                    {
 //                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
@@ -167,7 +167,7 @@
 ////            }
 ////
 ////            // Sign in the user with this external login provider if the user already has a login
-////            var user = await UserManager.FindAsync(loginInfo.Login);
+////            var user = await _userManager.FindAsync(loginInfo.Login);
 ////            if (user != null)
 ////            {
 ////                await SignInAsync(user, isPersistent: false);
@@ -201,7 +201,7 @@
 ////            {
 ////                return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
 ////            }
-////            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
+////            var result = await _userManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
 ////            if (result.Succeeded)
 ////            {
 ////                return RedirectToAction("Manage");
@@ -230,10 +230,10 @@
 ////                    return View("ExternalLoginFailure");
 ////                }
 ////                var user = new Member() { UserName = model.UserName };
-////                var result = await UserManager.CreateAsync(user);
+////                var result = await _userManager.CreateAsync(user);
 ////                if (result.Succeeded)
 ////                {
-////                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+////                    result = await _userManager.AddLoginAsync(user.Id, info.Login);
 ////                    if (result.Succeeded)
 ////                    {
 ////                        await SignInAsync(user, isPersistent: false);
@@ -269,7 +269,7 @@
 ////        [ChildActionOnly]
 ////        public ActionResult RemoveAccountList()
 ////        {
-////            var linkedAccounts = UserManager.GetLogins(User.Identity.GetUserId());
+////            var linkedAccounts = _userManager.GetLogins(User.Identity.GetUserId());
 ////            ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
 ////            return (ActionResult)PartialView("_RemoveAccountPartial", linkedAccounts);
 ////        }
@@ -289,7 +289,7 @@
 //        private async Task SignInAsync(Member user, bool isPersistent)
 //        {
 //            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-//            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+//            var identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
 //            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
 //        }
 //
@@ -303,7 +303,7 @@
 //
 //        private bool HasPassword()
 //        {
-//            var user = UserManager.FindById(User.Identity.GetUserId());
+//            var user = _userManager.FindById(User.Identity.GetUserId());
 //            if (user != null)
 //            {
 //                return user.PasswordHash != null;

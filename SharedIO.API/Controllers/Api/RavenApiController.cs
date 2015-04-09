@@ -9,6 +9,13 @@ namespace SharedIO.API.Controllers.Api
     [RequireHttps]
     public abstract class RavenAPIController : ApiController
     {
+        protected RavenAPIController()
+        {} 
+
+        protected RavenAPIController(IDocumentSession ravenSession)
+        {
+            RavenSession = ravenSession;
+        }
 
 //        public IDocumentStore RavenStore
 //        {

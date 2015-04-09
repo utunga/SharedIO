@@ -24,14 +24,24 @@ namespace SharedIO.Controllers
             return RavenSession.Query<Transaction>().Where(x => x.PayerId == userID || x.PayeeId == userID);
         }
 
+        public decimal GetBalance(Account account)
+        {
+            throw new NotImplementedException();
+//            foreach (var identity in account.Identities)
+//            {
+//                
+//            }
+        }
+
         #endregion
 
         // GET api/transactions
         //[Authorize]
         public IEnumerable<object> GetAll()
         {
-            var currentIdentity = ObtainCurrentIdentity();
-            return GetTransactions("" + currentIdentity.Id);
+            throw  new NotImplementedException();
+            //var currentIdentity = Ob();
+            //return GetTransactions("" + currentIdentity.Id);
         }
 
         // GET api/transactions/5

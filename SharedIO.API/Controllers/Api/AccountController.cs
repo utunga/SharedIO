@@ -11,16 +11,16 @@ namespace SharedIO.API.Controllers.Api
     public class AccountController : ApiController
     {
         
-        public UserManager<Member> UserManager { get; private set; }
+        public UserManager<Account> _userManager { get; private set; }
 
         private IAuthenticationManager AuthenticationManager
         {
             get { return Request.GetOwinContext().Authentication; }
         }
 
-        public AccountController(UserManager<Member> userManager)
+        public AccountController(UserManager<Account> userManager)
         {
-            UserManager = userManager;
+            _userManager = userManager;
         }
 
         
@@ -34,8 +34,8 @@ namespace SharedIO.API.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            var user = new Member() {UserName = model.UserName};
-            var result = await UserManager.CreateAsync(user, model.Password);
+            var user = new Account() {UserName = model.UserName};
+            var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
                 await SignInAsync(user, isPersistent: false);
@@ -46,10 +46,10 @@ namespace SharedIO.API.Controllers.Api
             return errorResult;
         }
 
-        private async Task SignInAsync(Member user, bool isPersistent)
+        private async Task SignInAsync(Account user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            var identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
         }
 

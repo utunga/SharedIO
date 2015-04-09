@@ -112,10 +112,11 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ParentControllerTest.cs" />
+    <Compile Include="BaseRavenTest.cs" />
     <Compile Include="Controllers\MemberControllerTests.cs" />
     <Compile Include="Controllers\TransactionsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\TransactionSeviceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

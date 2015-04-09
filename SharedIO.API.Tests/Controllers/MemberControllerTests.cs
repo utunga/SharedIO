@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharedIO.API.Controllers.Api;
 using SharedIO.Controllers;
@@ -7,7 +8,7 @@ using SharedIO.Model;
 namespace SharedIO.API.Tests.Controllers
 {
     [TestClass]
-    public class MemberControllerTests : ParentControllerTest
+    public class MemberControllerTests : BaseRavenTest
     {
 
         [TestInitialize]
@@ -16,21 +17,18 @@ namespace SharedIO.API.Tests.Controllers
             SetUp();
         }
 
+       
         [TestMethod]
         public void GetAll_Test()
         {
-           
-            //FIXME what about balance checking ?
-            RavenSession.Store(new Member()
+            RavenSession.Store(new Account()
             {
-                name =  "Joe",
-                aboutme = "Friendly"
+                Name =  "Joe",
+                About = "Friendly"
             });
-         
             RavenSession.SaveChanges();
 
-            MemberController controller = new MemberController();
-            controller.RavenSession = RavenSession;
+            MemberController controller = new MemberController(RavenSession);
             var result = controller.GetAll();
             Assert.AreEqual(1, result.Count());
 
@@ -41,26 +39,29 @@ namespace SharedIO.API.Tests.Controllers
         [TestMethod]
         public void GetOne_Test()
         {
-
-            MemberController controller = new MemberController();
+            MemberController controller = new MemberController(RavenSession);
             controller.RavenSession = RavenSession;
-            var member = new Member()
+            var account = new Account()
             {
-                name = "Joe",
-                aboutme = "Friendly"
+                Name = "Joe",
+                About = "Friendly"
             };
-            var retVal = controller.Post(member);
-            var target = controller.Get(retVal.id);
+            RavenSession.Store(account);
+            RavenSession.SaveChanges();
 
-            Assert.AreEqual(retVal, target);
+            var result = controller.Get(account.Id);
 
-            CleanUp();
+            Assert.AreEqual(account.Name, result.name);
+            Assert.AreEqual(account.About, result.aboutme);
+
         }
+
+
 
         [TestCleanup]
         public void Clean()
         {
-            CleanUp();
+           //CleanUp();
         }
     }
 }

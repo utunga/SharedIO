@@ -11,6 +11,6 @@ namespace SharedIO.Model
         public string PayeeId { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
-        public List<Category> Categories { get; set; }
+        public List<Tag> Categories { get; set; }
     }
 }

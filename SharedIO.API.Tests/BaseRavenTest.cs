@@ -3,12 +3,11 @@ using System.Security.Principal;
 using System.Threading;
 using System.Web;
 using Raven.Client;
-using Raven.Client.Document;
 using Raven.Client.Embedded;
 
-namespace SharedIO.API.Tests.Controllers
+namespace SharedIO.API.Tests
 {
-    public class ParentControllerTest
+    public class BaseRavenTest
     {
         protected IDocumentSession RavenSession
         {
@@ -33,17 +32,6 @@ namespace SharedIO.API.Tests.Controllers
         {
             WebApiApplication.Store = new EmbeddableDocumentStore { RunInMemory = true };
             WebApiApplication.Store.Initialize();
-
-//            //FIXME1 it's no good to have unit tests depend on a service
-//            // but for now, we'll leave it like this 
-//            var docStore = new DocumentStore
-//            {
-//                Url = "http://localhost:8080",
-//                DefaultDatabase = "cpassets"
-//            };
-//
-//            docStore.Initialize();
-//            WebApiApplication.Store = docStore;
 
             SetUpIdentity();
 
