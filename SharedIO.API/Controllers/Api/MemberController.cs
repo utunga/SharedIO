@@ -27,7 +27,7 @@ namespace SharedIO.API.Controllers.Api
 
         public string aboutme { get; set; } //SPECNOTE: I think I would prefer just 'about'
 
-        public ICollection<Tag> tags { get; set; }
+        public ICollection<string> tags { get; set; }
 
         public static MemberProfileViewModel FromAccount(Account account, decimal balance)
         {
@@ -41,6 +41,7 @@ namespace SharedIO.API.Controllers.Api
                 portrait = account.Portrait,
                 aboutme = account.About,
                 created = account.Created,
+                tags = account.Tags,
                 balance = balance
             };
         }
@@ -52,6 +53,10 @@ namespace SharedIO.API.Controllers.Api
         //SPECNOTE http://jsonapi.org/format/
         ITransactionService _transactionService;
 
+        public MemberController() : base()
+        {
+            _transactionService = new TransactionService(RavenSession);
+        }
 
         public MemberController(IDocumentSession ravenSession) : base(ravenSession)
         {
@@ -82,9 +87,11 @@ namespace SharedIO.API.Controllers.Api
         [HttpGet]
         public MemberProfileViewModel Get(string id)
         {
-            var account = RavenSession.Load<Account>(id);
+            var account = RavenSession.Load<Account>(Account.SanitizeId(id));
             return MemberProfileViewModel.FromAccount(account, _transactionService.GetBalance(account.Id));
         }
+
+
 
 //        // POST: api/members
 //        [Route("api/members")]

@@ -22,6 +22,11 @@ namespace SharedIO.Model
     // You can add profile data for the user by adding more properties to your Member class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class Account : RavenUser
     {
+        public Account()
+        {
+            Tags = new List<string>();
+        }
+
         public string Name { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
@@ -29,10 +34,14 @@ namespace SharedIO.Model
         public DateTime Created { get; set; }
         public string Portrait { get; set; }
         public string About { get; set; }
+        public ICollection<string> Tags { get; }
 
-        public static string LongId(string id)
+        public static string SanitizeId(string id)
         {
-            return "account/" + id;
+            return string.IsNullOrEmpty(id) ? id :
+                id.StartsWith("accounts/") ? id :
+                "acccounts/" + id;
         }
+
     }
 }

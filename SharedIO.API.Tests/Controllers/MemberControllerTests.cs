@@ -35,7 +35,6 @@ namespace SharedIO.API.Tests.Controllers
             CleanUp();
         }
 
-
         [TestMethod]
         public void GetOne_Test()
         {
@@ -46,6 +45,8 @@ namespace SharedIO.API.Tests.Controllers
                 Name = "Joe",
                 About = "Friendly"
             };
+            account.Tags.Add("friendly");
+            account.Tags.Add("male");
             RavenSession.Store(account);
             RavenSession.SaveChanges();
 
@@ -53,9 +54,16 @@ namespace SharedIO.API.Tests.Controllers
 
             Assert.AreEqual(account.Name, result.name);
             Assert.AreEqual(account.About, result.aboutme);
-
+            AssertListEquality(new [] { "friendly", "male"}, result.tags);
         }
 
+
+
+        [TestMethod]
+        public void Register_Test()
+        {
+             
+        }
 
 
         [TestCleanup]
